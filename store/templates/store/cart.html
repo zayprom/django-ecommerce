@@ -1,0 +1,61 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+<main>
+  <section id="section-summary" class="summary">
+    <div class="summary-container">
+      <div class="heading-tertiary gradient">Your Cart</div>
+      {% for item in items %}
+      <div class="summary-product">
+        <div class="summary-img">
+          <img class="product-image" src="{{item.product.imageURL}}" />
+        </div>
+        <div class="summary-info">
+          <div class="product-title-cart gradient">{{item.product.name}}</div>
+          <p class="product-description">{{item.product.description}}</p>
+        </div>
+        <div class="summary-qty">
+          <div class="cart-headings">Quantity</div>
+          <div class="qty-btns">
+            <button
+              data-product="{{item.product.id}}"
+              data-action="add"
+              class="qty-btn update-cart"
+            >
+              +
+            </button>
+            <input
+              class="qty-count"
+              size="2"
+              type="text"
+              value="{{item.quantity}}"
+            />
+            <button
+              class="qty-btn update-cart"
+              data-product="{{item.product.id}}"
+              data-action="remove"
+            >
+              -
+            </button>
+          </div>
+        </div>
+        <div class="summary-price">
+          <div class="cart-headings">Price</div>
+          <p class="cart-price">{{item.get_total|floatformat:0}} USD</p>
+        </div>
+        <div class="summary-delete">
+          <button class="close">&times;</button>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="cart-checkout">
+        <div class="cart-total">
+          Total price:
+          <span class="total-price"
+            >{{order.get_cart_total|floatformat:0}} USD</span
+          >
+        </div>
+        <a href="{% url 'checkout' %}" class="btn-checkout inline">Checkout</a>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock content %}

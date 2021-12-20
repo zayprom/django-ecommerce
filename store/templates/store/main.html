@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+    <script src="https://unpkg.com/phosphor-icons"></script>
+
+    <!-- pokud je user lognutý, ukáže nám ho -->
+    <script type="text/javascript">
+      let user = "{{request.user}}";
+
+      function getToken(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      const csrftoken = getToken("csrftoken");
+    </script>
+
+    <title>Unique Online Store</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li>
+            <a class="main-nav-link" href="{% url 'store' %}">Shop</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="{% url 'store' %}#section-products"
+              >Products</a
+            >
+          </li>
+          <li><a class="main-nav-link" href="login.html">Account</a></li>
+          <li>
+            <a class="main-nav-link" href="{% url 'cart' %}">
+              <i class="ph-shopping-cart-simple"></i>
+              <span class="cart-count">{{cartItems}}</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    {% block content %} {% endblock content %}
+    <footer class="footer">
+      <div class="footer-area">
+        <nav class="footer-nav">
+          <ul class="footer-nav-list">
+            <li>
+              <a class="footer-nav-link" href="#">Company</a>
+            </li>
+            <li>
+              <a class="footer-nav-link" href="#section-products">Products</a>
+            </li>
+            <li><a class="footer-nav-link" href="#">Shipping</a></li>
+            <li>
+              <a class="footer-nav-link" href="#">Terms & Conditions</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+    <script src="{% static 'script/cart.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+
+<main>
+    <section id="section-checkout" class="checkout">
+        <div class="checkout-container">
+            <div class="heading-tertiary gradient">Checkout</div>
+            <!-- <p class="welcome-msg">Thanks for being part of Unique Online Store!</p> -->
+            <div class="account-info">
+            <div class="person-details hidden">
+                <div class="account-headings">Personnal information</div>
+                <form class="login-form visitor hidden">
+                    <div>
+                      <label for="username">
+                        <input type="text" placeholder="Username or E-mail" />
+                      </label>
+                    </div>
+                    <div>
+                      <label for="password">
+                        <input type="password" placeholder="Password" />
+                      </label>
+                    </div>
+                    <div class="product-footer">
+                      <button class="btn-login">Login</button>
+                      <button class="btn-login">Register</button>
+                    </div>
+                  </form>
+            </div>
+                <div class="billing-details">
+                    <div class="account-headings">Billing address</div>
+                    <form class="login-form user">
+                        <div>
+                          <label for="Address">
+                            <input type="text" placeholder="Adress" />
+                          </label>
+                        </div>
+                        <div>
+                          <label for="City">
+                            <input type="text" placeholder="City" />
+                          </label>
+                        </div>
+                        <div>
+                            <label for="State">
+                              <input type="text" placeholder="State" />
+                            </label>
+                          </div>
+                          <div>
+                            <label for="Zip Code">
+                              <input type="number" placeholder="Zip Code" />
+                            </label>
+                          </div>
+                          <div>
+                            <label for="Country">
+                              <input type="country" placeholder="Country" />
+                            </label>
+                          </div>
+                      </form>
+            </div>
+            <button class="qty-btn">Edit</button>
+            </div>
+        </div>
+        <div class="account-container-2">
+            <div class="account-headings gradient">Your order</div>
+            {% for item in items %}
+            <div class="order-box">
+            
+                
+                <div class="order-img">
+                    <img
+                    class="product-img"
+                    src="{{item.product.imageURL}}" />
+                </div>
+
+                <div class="order-details">
+                <div class="order-num gradient">{{item.product.name}}</div>
+                <div class="order-product">{{item.product.name}}</div>
+                <div class="order-detail">({{item.quantity}} pcs)</div>
+                <div class="order-date">23rd August 2021</div>
+                <div class="order-status">{{item.product.price|floatformat:0}} USD</div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+            <div class="checkout-total">
+              <p class="total-title">Total</p>
+              <p class="checkout-total-price update-cart">{{order.get_cart_total|floatformat:0}} USD</p>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+<script type="text/javascript">
+  if (user != 'AnonymousUser'){
+    document.getElementById('visitor').innerHTML= ''
+    document.getElementById('person-details').classList.add('hidden');
+  }
+</script>
+
+{% endblock content %}

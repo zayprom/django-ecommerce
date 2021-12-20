@@ -1,0 +1,108 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+<main>
+  <section id="section-hero" class="hero">
+    <div class="hero-area">
+      <div class="hero-text">
+        <h1 class="heading-primary gradient">This chair could be yours</h1>
+        <p class="hero-description">Simple, but perfect</p>
+      </div>
+      <div class="hero-img-area"></div>
+    </div>
+  </section>
+  <section id="section-products" class="products">
+    <div class="products-area">
+      <div class="products-heading">
+        <h2 class="heading-secondary gradient">The one & only</h2>
+      </div>
+      <div class="products-grid">
+        {% for product in products %}
+        <div class="single-product">
+          <div class="product-image-area">
+            <img class="product-image" src="{{product.imageURL}}" />
+          </div>
+          <div class="product-title gradient">{{product.name}}</div>
+          <p class="product-price">{{product.price|floatformat:0}} USD</p>
+          <p class="product-description">{{product.description}}</p>
+          <div class="product-footer">
+            <button
+              data-product="{{product.id}}"
+              data-action="add"
+              class="product-add-cart update-cart"
+            >
+              add to cart
+            </button>
+            <button class="product-more-details">more details</button>
+            <button class="product-fav-icon">
+              <i class="ph-heart-straight"></i>
+            </button>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="section-about" class="about">
+    <div class="heading-secondary gradient">Time to sit</div>
+    <div class="about-area">
+      <div class="about-description">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed ac dolor
+        sit amet purus malesuada congue. Cum sociis natoque penatibus et magnis
+        dis parturient montes, nascetur ridiculus mus. In laoreet, magna id
+        viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi
+        sed libero. Cum sociis natoque penatibus et magnis dis parturient
+        montes, nascetur ridiculus mus. In laoreet, magna id viverra tincidunt,
+        sem odio bibendum justo, vel imperdiet sapien wisi sed libero.
+      </div>
+      <div class="about-img">
+        <!-- <img
+              class="product-image"
+              src="static/img/qicy-msm24HHDHMk-unsplash.jpg"
+            /> -->
+      </div>
+    </div>
+
+    {% for product in products %}
+    <div class="product-details hidden">
+      <button class="details-close">&times;</button>
+      <div class="modal-area">
+        <div class="product-image-area">
+          <img
+            class="product-image"
+            src="{% static 'img/trendest-studio-XZ3EmAIWuz0-unsplash.jpg' %}"
+          />
+        </div>
+        <div class="product-features">
+          <h3 class="product-title gradient">{{product.name}}</h3>
+          <p class="product-price">{{product.price}} USD</p>
+          <div class="btn-details">
+            <button
+              data-product="{{product.id}}"
+              data-action="add"
+              class="product-add-cart trans-q update-cart"
+            >
+              add to cart
+            </button>
+            <button class="product-fav-icon trans-q">
+              <i class="ph-heart-straight"></i>
+            </button>
+          </div>
+
+          <p class="product-details-heading">Description</p>
+          <p class="product-description">{{product.description}}</p>
+          <p class="product-details-heading">Shipping</p>
+          <p class="product-description">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed ac
+            dolor sit amet purus malesuada congue
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="overlay hidden"></div>
+  </section>
+</main>
+<script src="{% static 'script/script.js' %}"></script>
+
+{% endblock content %}

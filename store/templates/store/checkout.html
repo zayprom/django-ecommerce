@@ -27,7 +27,7 @@
             </div>
                 <div class="billing-details">
                     <div class="account-headings">Billing address</div>
-                    <form class="login-form user">
+                    <form id ='form' class="login-form user">
                         <div>
                           <label for="Address">
                             <input type="text" placeholder="Adress" />
@@ -53,9 +53,11 @@
                               <input type="country" placeholder="Country" />
                             </label>
                           </div>
-                      </form>
+                      
             </div>
-            <button class="qty-btn">Edit</button>
+            <input id='submit' class="qty-btn" type='submit' value="Continue">
+            <button id='payment' class="qty-btn hidden">Payment</button>
+          </form>
             </div>
         </div>
         <div class="account-container-2">
@@ -72,7 +74,6 @@
 
                 <div class="order-details">
                 <div class="order-num gradient">{{item.product.name}}</div>
-                <div class="order-product">{{item.product.name}}</div>
                 <div class="order-detail">({{item.quantity}} pcs)</div>
                 <div class="order-date">23rd August 2021</div>
                 <div class="order-status">{{item.product.price|floatformat:0}} USD</div>
@@ -92,10 +93,29 @@
 
 </main>
 <script type="text/javascript">
-  if (user != 'AnonymousUser'){
-    document.getElementById('visitor').innerHTML= ''
-    document.getElementById('person-details').classList.add('hidden');
+
+  let form = document.getElementById('form');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    console.log('Form submitted...');
+    document.getElementById('submit').classList.add('hidden');
+    document.getElementById('payment').classList.remove('hidden');
+    
+  })
+
+  document.getElementById('payment').addEventListener('click', function(e) {
+    submitFormData();
+  })
+
+  function submitFormData(){
+    console.log('Payment button clicked')
   }
+
+  // if (user != 'AnonymousUser'){
+  //   document.getElementById('visitor').innerHTML= '';
+  //   document.getElementById('person-details').classList.add('hidden');
+  // }
 </script>
 
 {% endblock content %}

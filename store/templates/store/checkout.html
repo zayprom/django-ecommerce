@@ -30,27 +30,27 @@
                     <form id ='form' class="login-form user">
                         <div>
                           <label for="Address">
-                            <input type="text" placeholder="Adress" />
+                            <input type="text" name="address" placeholder="Adress" />
                           </label>
                         </div>
                         <div>
                           <label for="City">
-                            <input type="text" placeholder="City" />
+                            <input type="text" name="city" placeholder="City" />
                           </label>
                         </div>
                         <div>
                             <label for="State">
-                              <input type="text" placeholder="State" />
+                              <input type="text" name="state" placeholder="State" />
                             </label>
                           </div>
                           <div>
                             <label for="Zip Code">
-                              <input type="number" placeholder="Zip Code" />
+                              <input type="number" name="number" placeholder="Zip Code" />
                             </label>
                           </div>
                           <div>
                             <label for="Country">
-                              <input type="country" placeholder="Country" />
+                              <input type="country" name="country" placeholder="Country" />
                             </label>
                           </div>
                       
@@ -95,6 +95,7 @@
 <script type="text/javascript">
 
   let form = document.getElementById('form');
+  let total = '{{order.get_cart_total|floatformat:2}}'
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -110,6 +111,42 @@
 
   function submitFormData(){
     console.log('Payment button clicked')
+
+    let userFormData = {
+      'name':null,
+      'email':null,
+      'total':total,
+    }
+
+    let shippingInfo = {
+      'address':null,
+      'city':null,
+      'state':null,
+      'zipcode':null,
+    }
+    
+    if(user == 'AnonymousUser'){
+      userFormData.name = form.name.value
+      userFormData.email = form.email.value
+    }
+
+    let url = '/process_order/';
+
+    fetch(url,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        "X-CSRFToken": csrftoken,
+      },
+      body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+    })
+    .then((response) => response.json())
+    .then((data)=> {
+      console.log('Success', data);
+      alert('Transaction completed');
+      window.location.href = "{% url 'store' %}"
+    })
+
   }
 
   // if (user != 'AnonymousUser'){

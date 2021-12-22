@@ -76,7 +76,7 @@
                 <div class="order-num gradient">{{item.product.name}}</div>
                 <div class="order-detail">({{item.quantity}} pcs)</div>
                 <div class="order-date">23rd August 2021</div>
-                <div class="order-status">{{item.product.price|floatformat:0}} USD</div>
+                <div class="order-status">{{item.product.price}} USD</div>
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
 
             <div class="checkout-total">
               <p class="total-title">Total</p>
-              <p class="checkout-total-price update-cart">{{order.get_cart_total|floatformat:0}} USD</p>
+              <p class="checkout-total-price update-cart">{{order.get_cart_total}} USD</p>
             </div>
 
             </div>

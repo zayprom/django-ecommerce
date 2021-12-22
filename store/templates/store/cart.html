@@ -39,7 +39,7 @@
         </div>
         <div class="summary-price">
           <div class="cart-headings">Price</div>
-          <p class="cart-price">{{item.get_total|floatformat:0}} USD</p>
+          <p class="cart-price">{{item.get_total}} USD</p>
         </div>
         <div class="summary-delete">
           <button class="close">&times;</button>
@@ -49,9 +49,7 @@
       <div class="cart-checkout">
         <div class="cart-total">
           Total price:
-          <span class="total-price"
-            >{{order.get_cart_total|floatformat:0}} USD</span
-          >
+          <span class="total-price">{{order.get_cart_total}} USD</span>
         </div>
         <a href="{% url 'checkout' %}" class="btn-checkout inline">Checkout</a>
       </div>

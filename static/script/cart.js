@@ -17,6 +17,10 @@ for (let i = 0; i < updateBtns.length; i++) {
   });
 }
 
+function addCookieItem(productId, action) {
+  console.log("Not logged in..");
+}
+
 function updateUserOrder(productId, action) {
   console.log("User is logged in, sending data..");
 

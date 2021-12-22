@@ -39,11 +39,11 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
-    # @property
-    # def shipping(self):
-    #     shipping = True
-    #     orderItems = self.orderItem_set.all()
-    #     return shipping
+    @property
+    def shipping(self):
+        shipping = True
+        orderItems = self.orderitem_set.all()
+        return shipping
         
     @property
     def get_cart_total(self):
@@ -78,7 +78,7 @@ class ShippingAddress(models.Model):
     address = models.CharField(max_length=200, null=True)
     city = models.CharField(max_length=200, null=True)
     state = models.CharField(max_length=200, null=True)
-    zipcode = models.IntegerField(default = 0, null=True)
+    zipcode = models.CharField(max_length=10, null=True)
     country = models.CharField(max_length=200, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
 

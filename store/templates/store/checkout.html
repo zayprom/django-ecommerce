@@ -30,7 +30,7 @@
                     <form id ='form' class="login-form user">
                         <div>
                           <label for="Address">
-                            <input type="text" name="address" placeholder="Adress" />
+                            <input type="text" name="address" placeholder="Address" />
                           </label>
                         </div>
                         <div>
@@ -45,7 +45,7 @@
                           </div>
                           <div>
                             <label for="Zip Code">
-                              <input type="number" name="number" placeholder="Zip Code" />
+                              <input type="number" name="zipcode" placeholder="Zip Code" />
                             </label>
                           </div>
                           <div>
@@ -95,7 +95,7 @@
 <script type="text/javascript">
 
   let form = document.getElementById('form');
-  let total = '{{order.get_cart_total|floatformat:2}}'
+  let total = '{{order.get_cart_total}}'
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -123,6 +123,15 @@
       'city':null,
       'state':null,
       'zipcode':null,
+      'country':null,
+    }
+
+    if(shipping = 'True'){
+      shippingInfo.address = form.address.value
+      shippingInfo.city = form.city.value
+      shippingInfo.state = form.state.value
+      shippingInfo.zipcode = form.zipcode.value
+      shippingInfo.country = form.country.value
     }
     
     if(user == 'AnonymousUser'){

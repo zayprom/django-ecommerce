@@ -20,7 +20,7 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    # odstranit error pokud není img
+    # Removes error in case of missing IMG
 
     @property
     def imageURL(self):

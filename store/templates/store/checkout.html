@@ -6,23 +6,23 @@
             <div class="heading-tertiary gradient">Checkout</div>
             <!-- <p class="welcome-msg">Thanks for being part of Unique Online Store!</p> -->
             <div class="account-info">
-            <div class="person-details hidden">
+            <div class="person-details">
                 <div class="account-headings">Personnal information</div>
-                <form class="login-form visitor hidden">
+                <form id='form' class="login-form visitor">
                     <div>
-                      <label for="username">
-                        <input type="text" placeholder="Username or E-mail" />
+                      <label for="name">
+                        <input type="text" name="name" placeholder="Name" />
                       </label>
                     </div>
                     <div>
-                      <label for="password">
-                        <input type="password" placeholder="Password" />
+                      <label for="email">
+                        <input type="email" name="email" placeholder="E-mail" />
                       </label>
                     </div>
-                    <div class="product-footer">
+                    <!-- <div class="product-footer">
                       <button class="btn-login">Login</button>
                       <button class="btn-login">Register</button>
-                    </div>
+                    </div> -->
                   </form>
             </div>
                 <div class="billing-details">
@@ -153,6 +153,9 @@
     .then((data)=> {
       console.log('Success', data);
       alert('Transaction completed');
+
+    cart = {}
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
       window.location.href = "{% url 'store' %}"
     })
 

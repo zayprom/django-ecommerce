@@ -1,0 +1,30 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+
+<main>
+  <section id="section-login" class="login">
+    <div class="main-container">
+      <div class="heading-tertiary gradient">Register</div>
+      <form class="login-form" method="POST">
+        {% csrf_token %}
+        <div>
+          <label for="username">{{form.username.label}}</label>
+          <p class="register-field">{{form.username}}</p>
+        </div>
+        <div>
+          <label for="password">{{form.password1.label}}</label>
+          <p class="register-field">{{form.password1}}</p>
+        </div>
+        <div>
+          <label for="password">{{form.password2.label}}</label>
+          <p class="register-field">{{form.password2}}</p>
+        </div>
+        <div class="register-footer">
+          <button id="submit" class="btn-login">Register</button>
+          <a class="btn-login" href="{% url 'login' %}">Login</a>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

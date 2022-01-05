@@ -2,14 +2,29 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.base import ModelStateFieldsCacheDescriptor
 
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 # Create your models here.
+
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length = 200, null=True)
-    email = models.EmailField(max_length=500, blank=True, null=True)
+    email = models.EmailField(max_length=500, null=True)
+    phone = models.DecimalField(max_digits=12, decimal_places=0, null=True, blank=True)
+    newsletter = models.BooleanField(default=False) 
+    
+    @receiver(post_save, sender=User)
+    def create_user_customer(sender, instance, created, **kwargs):
+        if created:
+            Customer.objects.create(user=instance)
+            
+    @receiver(post_save, sender=User)
+    def save_user_customer(sender, instance, **kwargs):
+        instance.customer.save()
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Product(models.Model):
     name = models.CharField(max_length=200)

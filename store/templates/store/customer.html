@@ -1,0 +1,74 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+
+    <main>
+        <section id="section-account" class="account">
+            <div class="account-container">
+                <div class="heading-tertiary gradient">Welcome, {{customer.name}}!</div>
+                <!-- <p class="welcome-msg">Thanks for being part of Unique Online Store!</p> -->
+                <div class="account-info">
+                <div class="person-details">
+                    <div class="account-headings">Personnal information</div>
+                    <p class="person-detail"><strong>Name:</strong> {{customer.name}}</p>
+                    <p class="person-detail"><strong>E-mail:</strong> {{customer.email}}</p>
+                    <p class="person-detail"><strong>Phone:</strong> {{customer.phone}}</p>
+                    <p class="person-detail">{% if customer.newsletter == True %}<strong>Newsletter:</strong> Yes</p>
+                    {% else %}
+                    <strong>Newsletter:</strong> No</p>
+                    {% endif %}
+                </div>
+                <a class="qty-btn" href="{% url 'customer-update' customer.id %}">Edit</a>
+                
+                    <div class="billing-details">
+                        <div class="account-headings">Billing address</div>
+                    <p class="person-detail">Company Inc.</p>
+                    <p class="person-detail">572 George Washington str.</p>
+                    <p class="person-detail">Washington</p>
+                    <p class="person-detail">440 982</p>
+                    <p class="person-detail">United States</p>
+                </div>
+                <a class="qty-btn" href="{% url 'customer-update' customer.id %}">Edit</a>
+                </div>
+            </div>
+            <div class="account-container-2">
+                <div class="account-headings gradient">Your orders</div>
+                <div class="order-box">
+                    
+                    <div class="order-img">
+                        <img
+                        class="product-img"
+                        src="{{item.product.imageURL}}" />
+                    </div>
+
+                    <div class="order-details">
+                    <div class="order-num gradient">Order #024</div>
+                    <div class="order-product">Product </div>
+                    <div class="order-detail">3 999 USD <span class="order-detail">(1 pcs)</span></div>
+                    <div class="order-date">23rd August 2021</div>
+                    <div class="order-status">Shipped</div> 
+                    </div>
+                </div>
+
+                <div class="order-box">
+                    
+                    <div class="order-img">
+                        <img
+                        class="product-img"
+                        src="static/img/trendest-studio-XZ3EmAIWuz0-unsplash.jpg" />
+                    </div>
+
+                    <div class="order-details">
+                    <div class="order-num gradient">Order #023</div>
+                    <div class="order-product">Product</div>
+                    <div class="order-detail">3 999 USD <span class="order-detail">(1 pcs)</span></div>
+                    <div class="order-date">23rd August 2021</div>
+                    <div class="order-status">Delivered</div>
+                    </div>  
+                </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock %}

@@ -85,7 +85,17 @@
               >Products</a
             >
           </li>
-          <li><a class="main-nav-link" href="login.html">Account</a></li>
+          <li>
+            {% if request.user.is_authenticated %}
+            <a
+              class="main-nav-link"
+              href="{% url 'customer' user.customer.id %}"
+              >Account</a
+            >
+            {% else %}
+            <a class="main-nav-link" href="{% url 'register' %}">Account</a>
+            {% endif %}
+          </li>
           <li>
             <a class="main-nav-link" href="{% url 'cart' %}">
               <i class="ph-shopping-cart-simple"></i>

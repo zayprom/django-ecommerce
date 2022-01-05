@@ -4,30 +4,35 @@
     <section id="section-checkout" class="checkout">
         <div class="checkout-container">
             <div class="heading-tertiary gradient">Checkout</div>
-            <!-- <p class="welcome-msg">Thanks for being part of Unique Online Store!</p> -->
+            
             <div class="account-info">
-            <div class="person-details">
+            <!-- <div class="person-details"> -->
+                
                 <div class="account-headings">Personnal information</div>
-                <form id='form' class="login-form visitor">
+                
+                <form id='form' class="login-form">
                     <div>
                       <label for="name">
                         <input type="text" name="name" placeholder="Name" />
                       </label>
                     </div>
-                    <div>
+                    <div class="divider">
                       <label for="email">
                         <input type="email" name="email" placeholder="E-mail" />
                       </label>
                     </div>
+                    
                     <!-- <div class="product-footer">
                       <button class="btn-login">Login</button>
                       <button class="btn-login">Register</button>
                     </div> -->
-                  </form>
-            </div>
+                  <!-- </form> -->
+            <!-- </div> -->
+
+            
                 <div class="billing-details">
                     <div class="account-headings">Billing address</div>
-                    <form id ='form' class="login-form user">
+                    <!-- <form id ='form' class="login-form user"> -->
                         <div>
                           <label for="Address">
                             <input type="text" name="address" placeholder="Address" />
@@ -55,11 +60,12 @@
                           </div>
                       
             </div>
-            <input id='submit' class="qty-btn" type='submit' value="Continue">
+            <button id='submit' class="qty-btn">Continue</button>
             <button id='payment' class="qty-btn hidden">Payment</button>
           </form>
             </div>
         </div>
+        
         <div class="account-container-2">
             <div class="account-headings gradient">Your order</div>
             {% for item in items %}
@@ -96,6 +102,7 @@
 
   let form = document.getElementById('form');
   let total = '{{order.get_cart_total}}'
+
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -161,10 +168,7 @@
 
   }
 
-  // if (user != 'AnonymousUser'){
-  //   document.getElementById('visitor').innerHTML= '';
-  //   document.getElementById('person-details').classList.add('hidden');
-  // }
+  
 </script>
 
 {% endblock content %}

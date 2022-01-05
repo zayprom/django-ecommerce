@@ -375,8 +375,9 @@ p {
 
 .login {
   background-color: black;
+  padding-top: 5rem;
   /* padding: 10rem 20rem; */
-  height: calc(100vh - 10rem);
+  /* height: calc(100vh - 10rem); */
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
@@ -398,7 +399,11 @@ p {
 
 .login-form label {
   display: block;
-  padding-bottom: 2.4rem;
+  padding-bottom: 1.8rem;
+  font-size: 1.4rem;
+  font-family: inherit;
+  color: #fff;
+  letter-spacing: 0.2rem;
 }
 
 .login-form input {
@@ -421,10 +426,62 @@ p {
   color: #fff;
 }
 
+.login-form input[type="submit"]:hover {
+  background-color: #fff;
+  color: rgb(17, 15, 15);
+  transition: 0.4s;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: rgb(17, 15, 15);
+  margin: 0;
+  font-family: inherit;
+  color: #af7aff;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid;
+  border-image: linear-gradient(to right, #121fcf 0%, #af7aff 50%, #7ccfb9 71%)
+    1;
+  display: grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 1.65rem;
+  height: 1.65rem;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+  box-shadow: inset 1em 1em;
+}
+
+.register-footer {
+  display: flex;
+  gap: 1.8rem;
+  color: #fff;
+  align-items: stretch;
+  padding-top: 2.4rem;
+}
+
+.register-field {
+  padding-bottom: 2.4rem;
+}
+
+.divider {
+  padding-bottom: 2.4rem;
+}
+
 .btn-login {
   border: 1px solid #fff;
   padding: 0.7rem 1rem;
   font-family: inherit;
+  font-size: 1.4rem;
   letter-spacing: 0.1rem;
   background-color: rgb(17, 15, 15);
   color: #fff;
@@ -557,6 +614,7 @@ p {
 }
 
 .billing-details {
+  padding-top: 2.4rem;
   padding-bottom: 2.4rem;
 }
 
@@ -664,6 +722,7 @@ p {
   border-radius: 2px;
   border: none;
   font-family: inherit;
+  font-size: 1.4rem;
   cursor: pointer;
   color: #fff;
   border: 1px solid #fff;

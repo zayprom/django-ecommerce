@@ -1,12 +1,23 @@
-from django.shortcuts import render
+from typing import ContextManager
+from django.shortcuts import render, redirect
 
 from .models import *
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.detail import DetailView
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import FormView, UpdateView
+from django.contrib.auth import login
+
+from django.urls import reverse_lazy
+
 from django.http import JsonResponse
 import json
 import datetime
 from .utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
+
 def store(request):
 
     data = cartData(request)
@@ -16,10 +27,47 @@ def store(request):
     context = {'products':products, 'cartItems':cartItems}
     return render(request, 'store/store.html', context)
 
-# def detail(request, pk):
-#     product = Product.objects.get(id = pk)
-#     context = {'product':product}
-#     return render(request, 'store/item_detail.html', context)
+
+class CustomLoginView(LoginView):
+	template_name = 'store/login.html'
+	fields = '__all__'
+	redirect_authenticated_user = True
+
+	def get_success_url(self):
+		return reverse_lazy('store')
+
+class RegisterPage(FormView):
+	template_name = 'store/register.html'
+	form_class = UserCreationForm
+	redirect_authenticated_user = True
+	success_url = reverse_lazy('store')
+
+
+	def form_valid(self, form):
+		user = form.save()
+		if user is not None:
+			login(self.request, user)
+		return super(RegisterPage, self).form_valid(form)
+
+	def get(self, *args, **kwargs):
+		if self.request.user.is_authenticated:
+			return redirect('store')
+		return super(RegisterPage, self).get(*args, **kwargs)
+
+
+class CustomerDetail(LoginRequiredMixin, DetailView):
+    model = Customer
+    context_object_name = 'customer'
+    template_name = 'store/customer.html'
+    queryset = Customer.objects.all()
+
+
+class CustomerUpdate(LoginRequiredMixin, UpdateView):
+	model = Customer
+	fields = ['name', 'email', 'phone', 'newsletter']
+	success_url = reverse_lazy('store')
+	queryset = Customer.objects.all()
+
 
 def cart(request):
 

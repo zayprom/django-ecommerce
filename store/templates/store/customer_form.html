@@ -1,0 +1,79 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+
+    <main>
+        <section id="section-account" class="account">
+            <div class="account-container">
+                <div class="heading-tertiary gradient">Welcome, Petar!</div>
+                <!-- <p class="welcome-msg">Thanks for being part of Unique Online Store!</p> -->
+                <div class="account-info">
+
+                    
+                <div class="person-details">
+                <form class="login-form" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <label for="name">{{form.name.label}}</label>
+                        <p class="register-field">{{form.name}}</p>
+                      </div>
+                      <div>
+                        <label for="email">{{form.email.label}}</label>
+                        <p class="register-field">{{form.email}}</p>
+                      </div>
+                      <div>
+                        <label for="phone">{{form.phone.label}}</label>
+                        <p class="register-field">{{form.phone}}</p>
+                      </div>
+                      <div>
+                        <label for="newsletter">{{form.newsletter.label}}</label>
+                        <p class="register-field">{{form.newsletter}}</p>
+                      </div>
+                    <button id="submit" class="qty-btn">Save</button>
+                </div>
+                </form>
+                </div>
+                  
+                </div>
+            
+            <div class="account-container-2">
+                <div class="account-headings gradient">Your orders</div>
+                <div class="order-box">
+                    
+                    <div class="order-img">
+                        <img
+                        class="product-img"
+                        src="static/img/trendest-studio-XZ3EmAIWuz0-unsplash.jpg" />
+                    </div>
+
+                    <div class="order-details">
+                    <div class="order-num gradient">Order #024</div>
+                    <div class="order-product">Product </div>
+                    <div class="order-detail">3 999 USD <span class="order-detail">(1 pcs)</span></div>
+                    <div class="order-date">23rd August 2021</div>
+                    <div class="order-status">Shipped</div> 
+                    </div>
+                </div>
+
+                <div class="order-box">
+                    
+                    <div class="order-img">
+                        <img
+                        class="product-img"
+                        src="static/img/trendest-studio-XZ3EmAIWuz0-unsplash.jpg" />
+                    </div>
+
+                    <div class="order-details">
+                    <div class="order-num gradient">Order #023</div>
+                    <div class="order-product">Product </div>
+                    <div class="order-detail">3 999 USD <span class="order-detail">(1 pcs)</span></div>
+                    <div class="order-date">23rd August 2021</div>
+                    <div class="order-status">Delivered</div>
+                    </div>  
+                </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock %}
